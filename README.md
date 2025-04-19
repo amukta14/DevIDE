@@ -1,8 +1,8 @@
 
-# DevIde: AI-Powered IDE  
+# DevIDE: AI-Powered IDE  
 
 
-DevIde is an AI-powered IDE designed to boost your coding productivity. With real-time collaboration, smart code suggestions, and integrated tools, DevIde makes coding faster and easier.
+DevIDE is an AI-powered IDE designed to boost your coding productivity. With real-time collaboration, smart code suggestions, and integrated tools, DevIde makes coding faster and easier.
 
 ## Features  
 
@@ -27,8 +27,8 @@ DevIde is an AI-powered IDE designed to boost your coding productivity. With rea
 ### Installation  
 1. Clone the repository:  
    ```sh
-   git clone https://github.com/amukta14/DevIde
-   cd DevIde
+   git clone https://github.com/amukta14/DevIDE
+   cd DevIDE
    ```
 
 2. Install dependencies:  
