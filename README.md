@@ -18,7 +18,7 @@ DevIDE is an AI-powered IDE designed to boost your coding productivity. With rea
   <img width="1283" alt="Screenshot 2025-06-20 at 1 43 26 PM" src="https://github.com/user-attachments/assets/64f6a4f8-97e9-4853-9c7c-97f694c34311" />
 
 - **Integrated Terminal**: Run and test code directly within the IDE.
-  <img width="1710" alt="Screenshot 2025-06-20 at 1 38 17 PM" src="https://github.com/user-attachments/assets/ea2661a6-558b-4247-a5d0-dfcd86fb1de0" />
+<img width="1706" alt="Screenshot 2025-06-20 at 1 38 27 PM" src="https://github.com/user-attachments/assets/1b89c5ad-9572-41f7-9442-2b2db2ad3bc8" />
   
 - **Custom Themes**: Switch between dark, light, and solarized themes.
 
