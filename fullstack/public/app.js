@@ -886,7 +886,7 @@ require(['vs/editor/editor.main'], function () {
 
 
   // Connect to the WebSocket server
-  const ws = new WebSocket('ws://localhost:8080');
+  const ws = new WebSocket('ws://localhost:8081');
 
   // Handle WebSocket connection
   ws.onopen = () => {

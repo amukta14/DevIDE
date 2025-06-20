@@ -1,5 +1,3 @@
-
-
 const express = require('express');
 const { spawn, exec } = require('child_process');
 const cors = require('cors');
@@ -21,6 +19,13 @@ const htmlFilePath = path.join(htmlPreviewDir, 'temp.html'); // Static file path
 // Serve the static HTML preview
 app.use('/preview', express.static(htmlPreviewDir, { cacheControl: false }));
 
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Serve index.html for the root path
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 app.get('/api/key', (req, res) => {
     // console.log(-1);
     // console.log(process.env.GEMINI_API_KEY)
@@ -28,7 +33,7 @@ app.get('/api/key', (req, res) => {
 });
 
 // Create a WebSocket server
-const wss = new WebSocket.Server({ port: 8080 });
+const wss = new WebSocket.Server({ port: 8081 });
 
 const sessions = new Map(); // Store session data
 
@@ -198,7 +203,7 @@ wss.on('connection', (ws) => {
     });
 });
 
-console.log('WebSocket server is running on ws://localhost:8080');
+console.log('WebSocket server is running on ws://localhost:8081');
 
 // Existing routes for HTML preview and code execution
 app.post('/deploy', async (req, res) => {
@@ -236,7 +241,7 @@ app.post('/execute-code', (req, res) => {
     if (["python", "javascript", "typescript"].includes(language)) {
         switch (language) {
             case 'python':
-                runCmd = 'python';
+                runCmd = 'python3';
                 args = ['-c', code];
                 break;
 
