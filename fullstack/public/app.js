@@ -107,7 +107,7 @@ require(['vs/editor/editor.main'], function () {
 
   async function getAPIKey() {
     try {
-      const response = await fetch('http://localhost:3000/api/key');
+      const response = await fetch('/api/key');
       const data = await response.json();
       return data.apiKey;
     } catch (error) {
@@ -363,10 +363,10 @@ require(['vs/editor/editor.main'], function () {
       clearTimeout(debounceTimeout);
       debounceTimeout = setTimeout(async () => {
         try {
-          const previewResponse = await fetch("http://localhost:3000/preview/temp.html", { method: "HEAD" });
+          const previewResponse = await fetch("/preview/temp.html", { method: "HEAD" });
           if (previewResponse.ok) {
 
-            await fetch("http://localhost:3000/live-server", {
+            await fetch("/live-server", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ code, language })
@@ -382,7 +382,7 @@ require(['vs/editor/editor.main'], function () {
   // Function to deploy code
   async function deployCode(code, language) {
     try {
-      const response = await fetch('http://localhost:3000/deploy', {
+      const response = await fetch('/deploy', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ code, language }),
@@ -446,7 +446,7 @@ require(['vs/editor/editor.main'], function () {
   // Function to execute code in the backend
   async function RunInBackend(code, language, input) {
     try {
-      const response = await fetch('http://localhost:3000/execute-code', {
+      const response = await fetch('/execute-code', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ code, language, input }),
@@ -886,7 +886,7 @@ require(['vs/editor/editor.main'], function () {
 
 
   // Connect to the WebSocket server
-  const ws = new WebSocket('ws://localhost:8081');
+  const ws = new WebSocket(`ws://${window.location.host}`);
 
   // Handle WebSocket connection
   ws.onopen = () => {

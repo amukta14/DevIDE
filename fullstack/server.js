@@ -13,6 +13,9 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+// Use Render's PORT environment variable or default to 3000
+const PORT = process.env.PORT || 3000;
+
 const htmlPreviewDir = tmp.dirSync({ unsafeCleanup: true }).name; // One-time temp directory
 const htmlFilePath = path.join(htmlPreviewDir, 'temp.html'); // Static file path
 
@@ -32,8 +35,12 @@ app.get('/api/key', (req, res) => {
     res.json({ apiKey: process.env.GEMINI_API_KEY || '' });
 });
 
-// Create a WebSocket server
-const wss = new WebSocket.Server({ port: 8081 });
+// Create a WebSocket server attached to the Express server
+const server = app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+});
+
+const wss = new WebSocket.Server({ server });
 
 const sessions = new Map(); // Store session data
 
@@ -203,8 +210,6 @@ wss.on('connection', (ws) => {
     });
 });
 
-console.log('WebSocket server is running on ws://localhost:8081');
-
 // Existing routes for HTML preview and code execution
 app.post('/deploy', async (req, res) => {
     const { code, language } = req.body;
@@ -215,7 +220,7 @@ app.post('/deploy', async (req, res) => {
 
     fs.writeFileSync(htmlFilePath, code);
 
-    return res.json({ url: `http://localhost:3000/preview/temp.html` });
+    return res.json({ url: `http://localhost:${PORT}/preview/temp.html` });
 });
 
 app.post('/live-server', async (req, res) => {
@@ -406,9 +411,4 @@ app.post('/execute-code', (req, res) => {
             res.json(code === 0 ? { output: output.trim() } : { error: errorOutput.trim() || "Runtime error" });
         });
     });
-});
-
-// Start the Express server
-app.listen(3000, () => {
-    console.log("Server running at http://localhost:3000");
 });
